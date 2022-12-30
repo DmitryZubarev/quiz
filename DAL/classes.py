@@ -2,9 +2,8 @@ from sqlalchemy import Column, Integer, String, ForeignKey, TIMESTAMP, Interval,
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, relationship
 
-"""https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#one-to-many"""
 
-engine = create_engine("postgresql+psycopg2://postgres:Dc028ed7_@localhost/quiz")
+engine = create_engine("postgresql+pg8000://postgres:Dc028ed7_@localhost:5432/quiz", echo=True)
 db = declarative_base()
 
 
@@ -70,7 +69,7 @@ class Answer(db):
     id_session_user = Column(Integer, ForeignKey("session_user.id"))
 
     session = relationship("Session", back_populates="answer")
-    question = relationship("Qeustion", back_populates="answer")
+    question = relationship("Question", back_populates="answer")
     session_user = relationship("SessionUser", back_populates="answer")
     selected_option = relationship("SelectedOption", back_populates="answer")
     selected_match = relationship("SelectedMatch", back_populates="answer")
