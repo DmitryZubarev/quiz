@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, TIMESTAMP, Interval, Boolean, VARCHAR, Text
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import declarative_base, relationship, Session as Sess
-from sqlalchemy.orm import sessionmaker
 
 
 engine = create_engine("postgresql+pg8000://postgres:Dc028ed7_@localhost/exports", echo=True)
@@ -49,7 +48,7 @@ class Promt(db):
 
     selected_match = relationship("SelectedMatch", back_populates="promt")
     question = relationship("Question", back_populates="promt")
-    match = relationship("Match", back_populates="promt")
+    match = relationship("Match", back_populates="promt", uselist=False)
 
 
 class Match(db):
