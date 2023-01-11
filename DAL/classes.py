@@ -280,11 +280,3 @@ class Slide(db):
 
 
 db.metadata.create_all(engine)
-
-session = Sess(engine, future=True)
-statement = select(Session.date_start)
-result = session.execute(statement).all()
-for i in result:
-    print(i)
-
-
